@@ -29,7 +29,7 @@ public class BallLauncher extends GraphicsProgram{
 	public void mousePressed(MouseEvent e) {
 		for(GOval b : balls) {
 			if(b.getX() < 100) {
-				return;
+				 return;
 			}
 		}
 		GOval ball = makeBall(SIZE/2, e.getY());
