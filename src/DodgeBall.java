@@ -14,11 +14,13 @@ import acm.program.GraphicsProgram;
 import acm.util.RandomGenerator;
 
 public class DodgeBall extends GraphicsProgram implements ActionListener {
+	private static final int _40 = 5;
 	private ArrayList<GOval> balls;
 	private ArrayList<GRect> enemies;
 	private GLabel text;
 	private Timer movement;
 	private RandomGenerator rgen;
+	private int numTimes = 0;
 	
 	public static final int SIZE = 25;
 	public static final int SPEED = 2;
@@ -81,8 +83,13 @@ public class DodgeBall extends GraphicsProgram implements ActionListener {
 	}
 
 	private void moveAllBallsOnce() {
+		numTimes += 1;
 		for(GOval ball:balls) {
 			ball.move(SPEED, 0);
+		}
+		//enemy generator
+		if(numTimes % _40 == 0) {
+			addAnEnemy();
 		}
 	}
 	
