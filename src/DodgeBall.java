@@ -14,7 +14,7 @@ import acm.program.GraphicsProgram;
 import acm.util.RandomGenerator;
 
 public class DodgeBall extends GraphicsProgram implements ActionListener {
-	private static final int _40 = 5;
+	private static final int _40 = 40;
 	private ArrayList<GOval> balls;
 	private ArrayList<GRect> enemies;
 	private GLabel text;
@@ -85,8 +85,21 @@ public class DodgeBall extends GraphicsProgram implements ActionListener {
 
 	private void moveAllBallsOnce() {
 		numTimes += 1;
+		
 		for(GOval ball:balls) {
 			ball.move(SPEED, 0);
+			//Remove enemy from screen
+			GObject check =getElementAt((int)(ball.getX() + ball.getWidth() + 1), (int)(ball.getY() + ball.getHeight() + 1));
+			if(check instanceof GRect) {
+				remove(check);
+			}
+			//search for corresponding enemy remove it and get out of loop
+			for(int i = 0; i < enemies.size(); i++) {
+				if(enemies.get(i) == check) {
+					enemies.remove(i);
+					break;
+				}
+			}
 		}
 		//enemy generator
 		if(numTimes % _40 == 0) {
